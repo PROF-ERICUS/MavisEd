@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Miss. Mavis Kwofie</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav">
+      <div class="brand"><i class="dot"></i><span>Miss. Mavis Kwofie</span></div>
+      <button class="menu-btn" aria-label="Toggle Menu">☰</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="message.html">Message</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+  <h1>Contact</h1>
+  <p class="mtop" style="color:var(--muted)">
+    Send a message. I usually reply within 24 hours.
+  </p>
+
+  <form class="form mtop" id="contactForm">
+    <div class="row">
+      <div class="field">
+        <label for="name">Full Name *</label>
+        <input id="name" name="name" required />
+      </div>
+      <div class="field">
+        <label for="email">Email *</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+    </div>
+    <div class="field">
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" />
+    </div>
+    <div class="field">
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Send Message</button>
+    <p class="help">* Demo mode: Saved locally. No email is sent.</p>
+  </form>
+
+  <div id="successMessage" style="display:none; color:green; margin-top:15px;">
+    ✅ Your message has been saved locally. Thank you!
+  </div>
+</section>
+
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Get form values
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    // Get existing messages from localStorage
+    let savedMessages = JSON.parse(localStorage.getItem("contactMessages")) || [];
+
+    // Add new message
+    savedMessages.push({
+      name,
+      email,
+      subject,
+      message,
+      date: new Date().toLocaleString()
+    });
+
+    // Save back to localStorage
+    localStorage.setItem("contactMessages", JSON.stringify(savedMessages));
+
+    // Reset form
+    e.target.reset();
+
+    // Show success message
+    document.getElementById("successMessage").style.display = "block";
+  });
+</script>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© 2025 Miss. Mavis Kwofie</small>
+      <small><a href="index.html">Home</a></small>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documents | Miss. Mavis Kwofie</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav">
+      <div class="brand"><i class="dot"></i><span>Miss. Mavis Kwofie</span></div>
+      <button class="menu-btn" aria-label="Toggle Menu">☰</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="documents.html" class="active">Documents</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+      <h1>Documents</h1>
+
+      <!-- Owner Upload Section -->
+      <div id="owner-section" style="display: none;">
+        <h3>Owner Upload Area</h3>
+        <p class="help">Only visible to the owner after login.</p>
+        <input id="doc-files" type="file" multiple />
+        <table class="table mtop">
+          <thead><tr><th>File</th><th>Size</th><th>Action</th></tr></thead>
+          <tbody id="file-doc-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Download Section (Visible to All) -->
+      <div class="card mtop">
+        <h3>Available Downloads</h3>
+        <table class="table mtop">
+          <thead><tr><th>Title</th><th>Download</th></tr></thead>
+          <tbody id="download-tbody">
+            <tr>
+              <td>Sample CV</td>
+              <td><a href="cv/CV_2024091106532844.pdf" download>Download</a></td>
+            </tr>
+            <tr>
+              <td>Lesson Plan – Week 1</td>
+              <td><a href="docs/lesson-plan-week1.pdf" download>Download</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© 2025 Miss. Mavis Kwofie</small>
+      <small><a href="booking.html">Book now</a></small>
+    </div>
+  </footer>
+
+  <script>
+    // Simple password check for owner access
+    const isOwner = confirm("Are you the owner? Click OK and enter password if yes.");
+    if (isOwner) {
+      const password = prompt("Enter owner password:");
+      if (password === "Mavis@123") { // change to your secure password
+        document.getElementById("owner-section").style.display = "block";
+      }
+    }
+  </script>
+  <script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

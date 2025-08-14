@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages Inbox - Demo Mode</title>
+
+  <script>
+  // Simple password protection
+  document.addEventListener("DOMContentLoaded", function () {
+    const password = prompt("Enter password to access this page:");
+    if (password !== "Mavis123") {
+      alert("Incorrect password. Redirecting...");
+      window.location.href = "index.html"; // Back to home
+    }
+  });
+</script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #333;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .no-data {
+      text-align: center;
+      padding: 20px;
+      font-style: italic;
+    }
+    button {
+      padding: 5px 10px;
+      background: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📩 Messages Inbox (Demo Mode)</h1>
+
+  <table id="messagesTable">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="messagesBody">
+      <!-- Messages will be loaded here -->
+    </tbody>
+  </table>
+
+  <script>
+    function loadMessages() {
+      const messages = JSON.parse(localStorage.getItem("contactMessages")) || [];
+      const tableBody = document.getElementById("messagesBody");
+      tableBody.innerHTML = "";
+
+      if (messages.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="no-data">No messages yet.</td></tr>`;
+        return;
+      }
+
+      messages.forEach((msg, index) => {
+        const row = `
+          <tr>
+            <td>${msg.name}</td>
+            <td>${msg.email}</td>
+            <td>${msg.subject || "-"}</td>
+            <td>${msg.message}</td>
+            <td>${msg.date}</td>
+            <td><button onclick="deleteMessage(${index})">Delete</button></td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    function deleteMessage(index) {
+      let messages = JSON.parse(localStorage.getItem("contactMessages")) || [];
+      messages.splice(index, 1);
+      localStorage.setItem("contactMessages", JSON.stringify(messages));
+      loadMessages();
+    }
+
+    loadMessages();
+  </script>
+
+</body>
+</html>

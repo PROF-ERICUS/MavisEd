@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booking | Miss. Mavis Kwofie</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="nav">
+      <div class="brand"><i class="dot"></i><span>Miss. Mavis Kwofie</span></div>
+      <button class="menu-btn" aria-label="Toggle Menu">☰</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="documents.html">Documents</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+      <h1>Book a Session</h1>
+      <p class="mtop" style="color:var(--muted)">Choose online or in-person, then pick your date and time.</p>
+
+      <form class="form mtop" onsubmit="handleBookingSubmit(event)">
+        <div class="row">
+          <div class="field">
+            <label for="name">Full Name *</label>
+            <input id="name" name="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Mode *</label>
+            <div>
+              <label><input type="radio" name="mode" value="online" checked /> Online</label>
+              &nbsp;&nbsp;
+              <label><input type="radio" name="mode" value="in-person" /> In-person</label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="topic">Subject / Topic</label>
+            <input id="topic" name="topic" placeholder="e.g., Algebra basics" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="date">Preferred Date *</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+          <div class="field">
+            <label for="time">Preferred Time *</label>
+            <input id="time" name="time" type="time" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="5" placeholder="Anything I should know before the session?"></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit Booking</button>
+        <p class="help">This demo saves to your browser storage only. Connect email/DB for real bookings.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© 2025 Miss. Mavis Kwofie</small>
+      <small><a href="contact.html">Need help?</a></small>
+    </div>
+  </footer>
+  <script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
