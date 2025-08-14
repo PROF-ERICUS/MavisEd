@@ -23,21 +23,23 @@
   </header>
 
   <main>
-    <section class="container">
+  <section class="container">
   <h1>Contact</h1>
   <p class="mtop" style="color:var(--muted)">
     Send a message. I usually reply within 24 hours.
   </p>
 
-  <form class="form mtop" id="contactForm">
+  <form class="form mtop" id="contactForm" 
+        action="https://formspree.io/f/your_form_id" 
+        method="POST">
     <div class="row">
       <div class="field">
-        <label for="name">Full Name *</label>
+        <label for="name">Full Name </label>
         <input id="name" name="name" required />
       </div>
       <div class="field">
-        <label for="email">Email *</label>
-        <input id="email" name="email" type="email" required />
+        <label for="email">Email </label>
+        <input id="email" name="_replyto" type="email" required />
       </div>
     </div>
     <div class="field">
@@ -45,50 +47,38 @@
       <input id="subject" name="subject" />
     </div>
     <div class="field">
-      <label for="message">Message *</label>
+      <label for="message">Message </label>
       <textarea id="message" name="message" rows="6" required></textarea>
     </div>
     <button class="btn btn-primary" type="submit">Send Message</button>
-    <p class="help">* Demo mode: Saved locally. No email is sent.</p>
+    <p class="help"> Saved locally & sent via email</p>
   </form>
 
   <div id="successMessage" style="display:none; color:green; margin-top:15px;">
-    ✅ Your message has been saved locally. Thank you!
+    ✅ Your message has been saved locally and sent. Thank you!
   </div>
 </section>
 
 <script>
-  document.getElementById("contactForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    // Get form values
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const subject = document.getElementById("subject").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    // Get existing messages from localStorage
-    let savedMessages = JSON.parse(localStorage.getItem("contactMessages")) || [];
-
-    // Add new message
-    savedMessages.push({
-      name,
-      email,
-      subject,
-      message,
+  document.getElementById("contactForm").addEventListener("submit", function(event) {
+    // Save to LocalStorage
+    const messageData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value,
       date: new Date().toLocaleString()
-    });
+    };
 
-    // Save back to localStorage
-    localStorage.setItem("contactMessages", JSON.stringify(savedMessages));
-
-    // Reset form
-    e.target.reset();
+    let messages = JSON.parse(localStorage.getItem("contactMessages")) || [];
+    messages.push(messageData);
+    localStorage.setItem("contactMessages", JSON.stringify(messages));
 
     // Show success message
     document.getElementById("successMessage").style.display = "block";
   });
 </script>
+
 
   </main>
 
